@@ -14,7 +14,7 @@ You will also need a MongoDB instance to use this sample. If you have Docker ins
 
 ```
 docker pull mongo
-docker run --name mongo-sample -d mongo
+docker run --name mongo-sample -p 127.0.0.1:27017:27017 -d mongo
 ```
 
 If you don't have Docker, you can install MongoDB manually from [mongodb.com](https://docs.mongodb.com/manual/administration/install-community/)
