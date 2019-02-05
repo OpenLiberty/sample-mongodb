@@ -43,7 +43,7 @@ public class CrewService {
 	MongoDatabase db;
 
 	@Inject
-    Validator validator;
+	Validator validator;
 
 	@POST
 	@Path("/add") 
@@ -58,7 +58,7 @@ public class CrewService {
 				messages.add(v.getMessage());
 			}
 			return messages.build().toString();
-        }
+		}
 
 		MongoCollection<Document> crew = db.getCollection("Crew");
 		Document newCrewMember = new Document();
@@ -72,7 +72,6 @@ public class CrewService {
 	@GET
 	@Path("/remove/{id}")
 	public String remove(@PathParam("id") String id) {
-
 		MongoCollection<Document> crew = db.getCollection("Crew");
 		crew.deleteOne(new Document("_id", new ObjectId(id))); 
 		return "";
@@ -82,10 +81,10 @@ public class CrewService {
 
 	@GET
 	@Path("/retrieve")
-    public String retrieve() {
+	public String retrieve() {
 		StringWriter sb = new StringWriter();
 
-        try {
+		try {
 			MongoCollection<Document> crew = db.getCollection("Crew");
 			sb.append("[");
 			boolean first = true;
@@ -95,11 +94,9 @@ public class CrewService {
 				sb.append(d.toJson());
 			}
 			sb.append("]");
-        } catch (Exception e) {
-            e.printStackTrace(System.out);
-
-        }
-        return sb.toString();
-    }
-
+		} catch (Exception e) {
+			e.printStackTrace(System.out);
+		}
+		return sb.toString();
+	}
 }
