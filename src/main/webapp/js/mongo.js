@@ -31,7 +31,7 @@ function addCrewMember() {
 		refreshDocDisplay();
 	}
 
-	request.open("POST", "db/crew/add", true);
+	request.open("POST", "db/crew/"+crewMember.crewID, true);
 	request.setRequestHeader("Content-type", "application/json");
 	request.send(JSON.stringify(crewMember));
 }
@@ -57,7 +57,7 @@ function refreshDocDisplay() {
 		}
 	}
 
-	request.open("GET", "db/crew/retrieve", true);
+	request.open("GET", "db/crew/", true);
 	request.send();
 }
 
@@ -91,7 +91,7 @@ function remove(id) {
 		}
 	}
 
-	request.open("GET", "db/crew/remove/"+id, true);
+	request.open("DELETE", "db/crew/"+id, true);
 	request.send();
 }
 

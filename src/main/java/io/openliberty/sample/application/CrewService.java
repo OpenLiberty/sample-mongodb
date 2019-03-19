@@ -22,6 +22,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.Produces;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
@@ -46,7 +47,7 @@ public class CrewService {
 	Validator validator;
 
 	@POST
-	@Path("/add") 
+	@Path("/{id}") 
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON) 
 	public String add(CrewMember crewMember) {
@@ -69,8 +70,8 @@ public class CrewService {
 		return "";
 	}
 
-	@GET
-	@Path("/remove/{id}")
+	@DELETE
+	@Path("/{id}")
 	public String remove(@PathParam("id") String id) {
 		MongoCollection<Document> crew = db.getCollection("Crew");
 		crew.deleteOne(new Document("_id", new ObjectId(id))); 
@@ -80,7 +81,6 @@ public class CrewService {
 
 
 	@GET
-	@Path("/retrieve")
 	public String retrieve() {
 		StringWriter sb = new StringWriter();
 
