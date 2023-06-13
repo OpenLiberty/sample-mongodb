@@ -10,9 +10,8 @@
 *******************************************************************************/
 package io.openliberty.sample.application;
 
-import javax.ws.rs.ApplicationPath;
-import javax.ws.rs.core.Application;
-
+import jakarta.ws.rs.ApplicationPath;
+import jakarta.ws.rs.core.Application;
 
 @ApplicationPath("/db")
 public class CrewApplication extends Application { 	
