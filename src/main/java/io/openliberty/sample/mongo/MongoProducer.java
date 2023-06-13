@@ -18,10 +18,11 @@ import javax.inject.Inject;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 import com.ibm.websphere.crypto.PasswordUtil;
-import com.mongodb.MongoClient;
-import com.mongodb.MongoClientOptions;
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
+import com.mongodb.ConnectionString;
+import com.mongodb.MongoClientSettings;
 import com.mongodb.MongoCredential;
-import com.mongodb.ServerAddress;
 import com.mongodb.client.MongoDatabase;
 
 @ApplicationScoped
@@ -51,7 +52,13 @@ public class MongoProducer {
     public MongoClient createMongo() {
 		String password = PasswordUtil.passwordDecode(encodedPass);
         MongoCredential creds = MongoCredential.createCredential(user, dbName, password.toCharArray());
-        return new MongoClient(new ServerAddress(hostname, port), creds, new MongoClientOptions.Builder().build());
+
+        MongoClientSettings settings = MongoClientSettings.builder()
+        .applyConnectionString(new ConnectionString("mongodb://"+hostname+":"+port))
+        .credential(creds)
+        .build();
+
+        return MongoClients.create(settings);
     }
 
     @Produces

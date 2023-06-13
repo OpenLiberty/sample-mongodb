@@ -13,8 +13,8 @@ git clone git@github.com:OpenLiberty/sample-mongodb.git
 You will also need a MongoDB instance to use this sample. If you have Docker installed, you can use the following:
 
 ```
-docker build mongo --network="host" -t=liberty_mongo
-docker run liberty_mongo
+docker build -t=liberty_mongo mongo
+docker run -p 27017:27017 liberty_mongo
 ```
 
 If you don't have Docker, you can install MongoDB manually from [mongodb.com](https://docs.mongodb.com/manual/administration/install-community/)

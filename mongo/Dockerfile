@@ -1,10 +1,5 @@
-# Build with --network="host" so mongosh can find the mongo server
-# By default it will check on the host machine, this makes it check on the container
-
-# docker build mongo --network="host" -t=liberty_mongo
-
 FROM mongo:6.0.6
 
-COPY init.js /init.js
+ENV MONGO_INITDB_DATABASE=testdb
 
-RUN /bin/mongosh  < init.js
+COPY init.js /docker-entrypoint-initdb.d/init.js
