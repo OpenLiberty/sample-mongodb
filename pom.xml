@@ -20,11 +20,13 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <!-- Plugins -->
-        <version.maven-war-plugin>3.2.2</version.maven-war-plugin>
+        <version.liberty-maven-plugin>3.7.1</version.liberty-maven-plugin>
+        <version.maven-war-plugin>3.3.1</version.maven-war-plugin>
         <version.dockerfile-maven-plugin>1.4.3</version.dockerfile-maven-plugin>
         <version.maven-surefire-plugin>2.19.1</version.maven-surefire-plugin>
         <version.maven-failsafe-plugin>2.19.1</version.maven-failsafe-plugin>
         <!-- OpenLiberty runtime -->
+        <version.openliberty-group>io.openliberty</version.openliberty-group>
         <version.openliberty-runtime>RELEASE</version.openliberty-runtime>
         <http.port>9080</http.port>
         <https.port>9443</https.port>
@@ -120,12 +122,12 @@
             </plugin>
             <!-- Enable liberty-maven plugin -->
             <plugin>
-                <groupId>net.wasdev.wlp.maven.plugins</groupId>
+                <groupId>io.openliberty.tools</groupId>
                 <artifactId>liberty-maven-plugin</artifactId>
-                <version>2.3</version>
+                <version>${version.liberty-maven-plugin}</version>
                 <configuration>
                     <assemblyArtifact>
-                        <groupId>io.openliberty</groupId>
+                        <groupId>${version.openliberty-group}</groupId>
                         <artifactId>openliberty-runtime</artifactId>
                         <version>${version.openliberty-runtime}</version>
                         <type>zip</type>
@@ -148,4 +150,3 @@
         </plugins>
     </build>
 </project>
-
