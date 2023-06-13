@@ -13,7 +13,7 @@ git clone git@github.com:OpenLiberty/sample-mongodb.git
 You will also need a MongoDB instance to use this sample. If you have Docker installed, you can use the following:
 
 ```
-docker build -t=liberty_mongo mongo
+docker build -t liberty_mongo mongo
 docker run -p 27017:27017 liberty_mongo
 ```
 
@@ -49,7 +49,7 @@ From inside the sample-mongodb directory, build and start the application in Ope
 ./mvnw liberty:dev
 ```
 
-Once the server has started, the application is availible at http://localhost:9080/mongo/
+Once the server has started, the application is availible at http://localhost:9080
 
 ### Try it out
 Give the sample a try by registering a crew member. Enter a name (a String), an ID Number (an Integer), and select a Rank from the menu, then click 'Register Crew Member'.

@@ -3,12 +3,6 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>net.wasdev.wlp.maven.parent</groupId>
-        <artifactId>liberty-maven-app-parent</artifactId>
-        <version>2.1.2</version>
-    </parent>
-
     <groupId>io.openliberty.sample</groupId>
     <artifactId>MongoDBSample</artifactId>
     <version>1.0-SNAPSHOT</version>
@@ -21,65 +15,14 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <!-- Plugins -->
         <version.liberty-maven-plugin>3.7.1</version.liberty-maven-plugin>
-        <version.maven-war-plugin>3.3.1</version.maven-war-plugin>
-        <version.dockerfile-maven-plugin>1.4.3</version.dockerfile-maven-plugin>
-        <version.maven-surefire-plugin>2.19.1</version.maven-surefire-plugin>
-        <version.maven-failsafe-plugin>2.19.1</version.maven-failsafe-plugin>
         <!-- OpenLiberty runtime -->
         <version.openliberty-group>io.openliberty</version.openliberty-group>
         <version.openliberty-runtime>RELEASE</version.openliberty-runtime>
         <http.port>9080</http.port>
         <https.port>9443</https.port>
-        <packaging.type>usr</packaging.type>
-        <app.name>${project.artifactId}</app.name>
-        <package.file>${project.build.directory}/${app.name}.zip</package.file>
+        <liberty.var.app.context.root>/</liberty.var.app.context.root>
     </properties>
 
-    <!-- Profiles for temporarily switching packaging types -->
-    <profiles>
-        <!-- tag::profile-runnable-package[] -->
-        <profile>
-            <id>runnable-package</id>
-            <properties>
-                <packaging.type>runnable</packaging.type>
-            </properties>
-        </profile>
-        <!-- end::profile-runnable-package[] -->
-        <profile>
-            <id>minify-runnable-package</id>
-            <properties>
-                <packaging.type>minify,runnable</packaging.type>
-            </properties>
-        </profile>
-        <!-- tag::profile-docker-image[] -->
-        <profile>
-            <id>docker-image</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>com.spotify</groupId>
-                        <artifactId>dockerfile-maven-plugin</artifactId>
-                        <version>${version.dockerfile-maven-plugin}</version>
-                        <executions>
-                            <execution>
-                                <id>build-docker-image</id>
-                                <goals>
-                                    <goal>build</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                        <configuration>
-                            <repository>openliberty-${project.artifactId}</repository>
-                            <tag>${project.version}</tag>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-        <!-- end::profile-docker-image[] -->
-    </profiles>
-
-    <!-- Clean these up later -->
     <dependencies>
         <dependency>
             <groupId>org.eclipse.microprofile</groupId>
@@ -108,18 +51,8 @@
     </dependencies>
 
     <build>
-		<defaultGoal>clean package liberty:run-server</defaultGoal>
         <finalName>${project.artifactId}</finalName>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>${version.maven-war-plugin}</version>
-                <configuration>
-                    <failOnMissingWebXml>false</failOnMissingWebXml>
-                    <packagingExcludes>pom.xml</packagingExcludes>
-                </configuration>
-            </plugin>
             <!-- Enable liberty-maven plugin -->
             <plugin>
                 <groupId>io.openliberty.tools</groupId>
@@ -133,17 +66,10 @@
                         <type>zip</type>
                     </assemblyArtifact>
                     <serverName>MongoServer</serverName>
-                    <stripVersion>true</stripVersion>
-                    <configFile>src/main/liberty/config/server.xml</configFile>
-                    <!-- tag::loose-app[] -->
-                    <looseApplication>true</looseApplication>
-                    <!-- end::loose-app[] -->
-                    <packageFile>${package.file}</packageFile>
-                    <include>${packaging.type}</include>
                     <bootstrapProperties>
                         <default.http.port>${http.port}</default.http.port>
                         <default.https.port>${https.port}</default.https.port>
-                        <app.context.root>${app.name}</app.context.root>
+                        <app.context.root>${liberty.var.app.context.root}</app.context.root>
                     </bootstrapProperties>
                 </configuration>
             </plugin>
