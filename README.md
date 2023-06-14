@@ -31,15 +31,7 @@ db.createUser({user: 'sampleUser', pwd:'openliberty', roles: [{ role: 'readWrite
 
 You should see the following:
 ```
-Successfully added user: {
-        "user" : "sampleUser",
-        "roles" : [
-                {
-                        "role" : "readWrite",
-                        "db" : "testdb"
-                }
-        ]
-}
+{ ok: 1 }
 ```
 Now you are ready to run the sample. Type `exit` to get out of the mongo shell, and if using docker type `exit` again to exit the docker shell.
 
