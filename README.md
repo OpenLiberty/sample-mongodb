@@ -4,7 +4,7 @@
 This sample shows how to store data with MongoDB using CDI and MicroProfile Config, as well as data validation with Jakarta Bean Validation.
 
 ## Environment Set Up
-To run this sample, first [download](https://github.com/OpenLiberty/sample-mongodb/archive/master.zip) or clone this repo - to clone:
+To run this sample, first [download](https://github.com/OpenLiberty/sample-mongodb/archive/main.zip) or clone this repo - to clone:
 ```
 git clone git@github.com:OpenLiberty/sample-mongodb.git
 ```
@@ -14,7 +14,7 @@ You will also need a MongoDB instance to use this sample. If you have Docker ins
 
 ```
 docker build -t liberty_mongo mongo
-docker run -p 27017:27017 liberty_mongo
+docker run --name liberty_mongo -d -p 27017:27017 liberty_mongo
 ```
 
 If you don't have Docker, you can install MongoDB manually from [mongodb.com](https://docs.mongodb.com/manual/administration/install-community/)
@@ -47,6 +47,12 @@ Once the server has started, the application is availible at http://localhost:90
 Give the sample a try by registering a crew member. Enter a name (a String), an ID Number (an Integer), and select a Rank from the menu, then click 'Register Crew Member'.
 
 Two more boxes will appear, one with your crew members (which you can click to remove) and one showing how your data looks in MongoDB.
+
+### Stop MongoDB
+If you started MongoDB using docker, you can stop the container with:
+```
+docker stop liberty_mongo
+```
 
 ### How it works
 This application uses a CDI producer ([MongoProducer.java](https://github.com/OpenLiberty/sample-mongodb/tree/master/src/main/java/io/openliberty/sample/mongo/MongoProducer.java)) to inject a MongoDatabase. For more info on using a CDI producer with MongoDB, check out this [blog post](https://openliberty.io/blog/2019/02/19/mongodb-with-open-liberty.html). It provides access to the database in a RESTful manner in [CrewService.java](https://github.com/OpenLiberty/sample-mongodb/tree/master/src/main/java/io/openliberty/sample/application/CrewService.java) using the `/mongo/db` endpoint.
