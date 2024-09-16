@@ -13,27 +13,26 @@ git clone git@github.com:OpenLiberty/sample-mongodb.git
 You will also need a MongoDB instance to use this sample. If you have Docker installed, you can use the following:
 
 ```
-docker build -t liberty_mongo mongo
-docker run --name liberty_mongo -d -p 27017:27017 liberty_mongo
+docker run -d --name liberty_mongo -p 27017:27017 -e MONGO_INITDB_ROOT_USERNAME=sampleUser -e MONGO_INITDB_ROOT_PASSWORD=openliberty mongo:7.0.7
 ```
 
 If you don't have Docker, you can install MongoDB manually from [mongodb.com](https://docs.mongodb.com/manual/administration/install-community/)
 
 Next, you will need to create a user for authentication. Issue the following commands from the command line: 
 
-If you're using docker, you can skip this step. It is done for you by the `init.js` file.
+If you're using docker, you can skip this step.
 
 ```
 mongosh
 use testdb
-db.createUser({user: 'sampleUser', pwd:'openliberty', roles: [{ role: 'readWrite', db:'testdb'}]})
+db.createUser({user: 'sampleUser', pwd:'openliberty', roles: [{ role: 'readWrite', db:'admin'}]})
 ```
 
 You should see the following:
 ```
 { ok: 1 }
 ```
-Now you are ready to run the sample. Type `exit` to get out of the mongo shell, and if using docker type `exit` again to exit the docker shell.
+Now you are ready to run the sample. Type `exit` to get out of the mongo shell.
 
 ## Running the Sample
 From inside the sample-mongodb directory, build and start the application in Open Liberty with the following command:
