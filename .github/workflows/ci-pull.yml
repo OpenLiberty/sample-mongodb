@@ -22,6 +22,9 @@ jobs:
       mongo:
         #Update Readme to match
         image: mongo:7.0.7
+        env:
+            MONGO_INITDB_ROOT_USERNAME: sampleUser
+            MONGO_INITDB_ROOT_PASSWORD: openliberty
         # Set health checks to wait until mongo has started
         options: >-
           --health-cmd "echo 'db.runCommand("ping").ok' | mongosh --quiet"
