@@ -14,4 +14,5 @@
 
 	<variable name="mongo.user" value="sampleUser"/>
   	<variable name="mongo.pass.encoded" value="{aes}APtt+/vYxxPa0jE1rhmZue9wBm3JGqFK3JR4oJdSDGWM1wLr1ckvqkqKjSB2Voty8g=="/>
+    <variable name="mongo.dbname" value="admin"/> <!-- Use admin to avoid configuring the container with users-->
 </server>
